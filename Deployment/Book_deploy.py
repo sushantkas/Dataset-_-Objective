@@ -22,7 +22,8 @@ def main():
     # Load cosine similarity and data back from the pickle file
     suggestions=pt.index
     selected_book = st.sidebar.selectbox("Select a Book:", suggestions, help="Start typing to get suggestions.")
-    r_number=st.sidebar.selectbox("Numbers of Recommendations:", suggestions, help="Start typing to get suggestions.")
+    list_b=[5,10,15,20,30,50,70]
+    r_number=st.sidebar.selectbox("Numbers of Recommendations:",list_b , help="Start typing to get suggestions.")
     if selected_book:
         st.write("You selected:", selected_book)
 
