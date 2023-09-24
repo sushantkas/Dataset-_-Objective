@@ -22,23 +22,24 @@ def main():
     # Load cosine similarity and data back from the pickle file
     suggestions=pt.index
     selected_book = st.sidebar.selectbox("Select a Book:", suggestions, help="Start typing to get suggestions.")
+    r_number=st.sidebar.selectbox("Numbers of Recommendations:", suggestions, help="Start typing to get suggestions.")
     if selected_book:
         st.write("You selected:", selected_book)
 
     # Load cosine similarity and data back from the pickle file
-    return selected_book
+    return selected_book, r_number
 
 # Run the main function to start the Streamlit app
 if __name__ == "__main__":
-    selected_book=main()
+    selected_book, r_number=main()
 
 
 
 
-def recommend(book_name):
+def recommend(book_name,numbers):
     # fetch index
     index = np.where(pt.index==book_name)[0][0]
-    similar_items = sorted(list(enumerate(similarity_scores[index])), key = lambda x:x[1] , reverse = True)[1:6]
+    similar_items = sorted(list(enumerate(similarity_scores[index])), key = lambda x:x[1] , reverse = True)[1:numbers+1]
     
     data = []
     for i in similar_items:
@@ -75,6 +76,6 @@ def list_book(book_data):
 
 if st.sidebar.button("Recommend Books"):
     
-    list_book(recommend(selected_book))
+    list_book(recommend(selected_book,r_number ))
 else:
     st.sidebar.write("Click on Recommend book to get the best book for yourself.")
