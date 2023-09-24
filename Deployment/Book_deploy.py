@@ -4,6 +4,78 @@ import numpy as np
 import sklearn as sk
 import pickle
 
+# Define custom CSS for the book recommendation page
+custom_css = """
+<style>
+    /* Body styling */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Header styling */
+    .header {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+    }
+
+    /* Page container */
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    /* Book card styling */
+    .book-card {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin: 10px 0;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+    }
+
+    /* Book image */
+    .book-image {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Book title */
+    .book-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 10px 0;
+    }
+
+    /* Book author */
+    .book-author {
+        font-size: 16px;
+        color: #555;
+    }
+
+    /* Book description */
+    .book-description {
+        font-size: 16px;
+        margin-top: 10px;
+    }
+
+</style>
+"""
+
+# Apply the custom CSS
+st.markdown(custom_css, unsafe_allow_html=True)
+
+# Rest of your Streamlit app content goes here
+
 
 with open('cosine_similarity.pkl', 'rb') as file:
     similarity_scores = pickle.load(file)
@@ -18,7 +90,7 @@ books=pd.read_csv("New_book.csv")
 def main():
     st.title("Book Recommendation")
     
-    st.write("Welcome to my Streamlit web app.")
+    st.write("Based on your Favourite book we have recommended you might like.")
     # Load cosine similarity and data back from the pickle file
     suggestions=pt.index
     selected_book = st.sidebar.selectbox("Select a Book:", suggestions, help="Start typing to get suggestions.")
